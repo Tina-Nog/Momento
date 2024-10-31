@@ -10,7 +10,7 @@ db["funcionario"].countDocuments({departamento: ObjectId('85992103f9b3e0b3b3c1fe
 
 ## 2- Inclua suas próprias informações no departamento de Tecnologia da empresa.
 
- *R: Informações Adicionadas, insertedId: ObjectId('671ec85e994db10c6fb4a480').
+ * R: Informações Adicionadas, insertedId: ObjectId('671ec85e994db10c6fb4a480').
 ```js
 db["funcionario"].insertOne({
     nome:"Anna Cristina Santos",
@@ -26,7 +26,7 @@ db["funcionario"].insertOne({
 
 ## 3- Agora diga, quantos funcionários temos ao total na empresa?
 
-R: 24 funcionários.
+* R: 24 funcionários.
 ```js
 db["funcionario"].countDocuments()
 ```
@@ -54,7 +54,7 @@ db["funcionario"].aggregate([{$match:{departamento:ObjectId('85992103f9b3e0b3b3c
 
 ## 7- Um novo departamento foi criado. O departamento de Inovações. Ele será locado no Brasil. Por favor, adicione-o no banco de dados da empresa.
 
-*R: Departamento Adicionado.
+* R: Departamento Adicionado.
 ```js
 db["departamento"].insertOne({nome:"Inovações",escritorio:ObjectId('6722e3a400653ce18e125e97')})
 db["escritorio"].insertOne({
@@ -93,7 +93,8 @@ db["escritorio"].insertOne({
 
 ```
 ## 8- O departamento de Inovações está sem funcionários. Inclua alguns colegas de turma nesse departamento.  
-*R: Funcionários Adicionados.
+
+* R: Funcionários Adicionados.
 ```js
 db["funcionario"].insertMany([{nome:"Andressa Prudente", 
 telefone:"11.5374.0230",
@@ -151,14 +152,14 @@ departamento:ObjectId('6722ea791b0595e440c36a18')}])
 
 ## 9- Quantos funcionarios a empresa Momento tem agora?
 
-*R: 34 Funcionários.
+* R: 34 Funcionários.
 ```js
 db["funcionario"].countDocuments()
 ```
 
 ## 10- Quantos funcionários da empresa Momento possuem conjuges?
 
-*R: 7 Funcionários.
+* R: 7 Funcionários.
 ```js
 db["funcionario"].countDocuments({"dependentes.conjuge":{$exists:true}})
 
@@ -166,7 +167,7 @@ db["funcionario"].countDocuments({"dependentes.conjuge":{$exists:true}})
 
 ## 11- Qual a média salarial dos funcionários da empresa Momento, excluindo-se o CEO?
 
-*R: R$ 10.103
+* R: R$ 10.103
 ```js
 db["funcionario"].aggregate([{$match:{cargo:{$ne:"CEO"}}},{$group:{_id:null,mediaSalarios:{$avg:"$salario"}}},{$replaceRoot:{newRoot:{mediaSalarios:"$mediaSalarios"}}}])
 
@@ -174,7 +175,7 @@ db["funcionario"].aggregate([{$match:{cargo:{$ne:"CEO"}}},{$group:{_id:null,medi
 
 ## 12- Qual a média salarial do departamento de Tecnologia??
 
-*R: R$:5.800
+* R: R$:5.800
 ```js
 db["funcionario"].aggregate([
   {
@@ -194,7 +195,7 @@ db["funcionario"].aggregate([
 
 ## 13- Qual o departamento com a maior média salarial?
 
-*R: Execultivo.
+* R: Execultivo.
 ```js
 db["funcionario"].aggregate([
   {
@@ -214,7 +215,7 @@ db["funcionario"].aggregate([
 
 ## 14- Qual o departamento com o menor número de funcionários?
 
-*R: Execultivo.
+* R: Execultivo.
 ```js
 db["funcionario"].aggregate([
   {
@@ -234,7 +235,7 @@ db["funcionario"].aggregate([
 
 ## 15- Pensando na relação quantidade e valor unitario, qual o produto mais valioso da empresa?
 
-*R: Sabre de Luz.
+* R: Sabre de Luz.
 ```js
  db["vendas"].aggregate([{ $sort:{ quantidade:-1}},
  {$sort:{ precoUnitario:-1}}, { $limit: 1 }])
@@ -262,7 +263,9 @@ db["vendas"].aggregate([
 ```
 ## 17-Qual o produto menos vendido da empresa?
 
-*R: Uniforme do Superman
+* R: Uniforme do Superman
 ```js
 db["vendas"].aggregate([{ $sort: { quantidade: -1 } }, { $limit: 1 }]);
 ```
+
+---
