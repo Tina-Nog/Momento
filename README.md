@@ -1,15 +1,15 @@
 # Momento
-# Momento
+
 
 ## 1- Quantos funcionarios da empresa Momento trabalham no departamento de vendas?
-
+---
 * R: 10 funcionarios.
 ```js
 db["funcionario"].countDocuments({departamento: ObjectId('85992103f9b3e0b3b3c1fe71')})
 ```
-
+---
 ## 2- Inclua suas próprias informações no departamento de Tecnologia da empresa.
-
+---
  * R: Informações Adicionadas, insertedId: ObjectId('671ec85e994db10c6fb4a480').
 ```js
 db["funcionario"].insertOne({
@@ -23,37 +23,37 @@ db["funcionario"].insertOne({
      })
 
 ```
-
+---
 ## 3- Agora diga, quantos funcionários temos ao total na empresa?
-
+---
 * R: 24 funcionários.
 ```js
 db["funcionario"].countDocuments()
 ```
 ---
 ## 4- E quanto ao Departamento de Tecnologia?
-
+---
 * R: 6 funcionários. 
 ```js
 db["funcionario"].countDocuments({departamento:ObjectId('85992103f9b3e0b3b3c1fe74')})
 ```
-
+---
 ## 5-  Qual a média salarial do departamento de tecnologia?
-
+---
 * R: Média Salarial:R$5.800
 ```js
 db["funcionario"].aggregate([{$match:{departamento:ObjectId('85992103f9b3e0b3b3c1fe74')}},$group:{_id: null,mediaSalarios:{$avg:"$salario"}}},{$project:{_id:0,mediaSalarios:1}},{$limit:1}])
 ```
-
+---
 ## 6- Quanto o departamento de Vendas gasta em salários?
-
+---
 * R: Salário: 95.100
 ```js
 db["funcionario"].aggregate([{$match:{departamento:ObjectId('85992103f9b3e0b3b3c1fe71')}},{$group:{_id:null,Salario:{$sum:"$salario"}}},{$project:{_id:0,Salario:1}}])
 ```
-
+---
 ## 7- Um novo departamento foi criado. O departamento de Inovações. Ele será locado no Brasil. Por favor, adicione-o no banco de dados da empresa.
-
+---
 * R: Departamento Adicionado.
 ```js
 db["departamento"].insertOne({nome:"Inovações",escritorio:ObjectId('6722e3a400653ce18e125e97')})
@@ -92,8 +92,9 @@ db["escritorio"].insertOne({
 
 
 ```
+---
 ## 8- O departamento de Inovações está sem funcionários. Inclua alguns colegas de turma nesse departamento.  
-
+---
 * R: Funcionários Adicionados.
 ```js
 db["funcionario"].insertMany([{nome:"Andressa Prudente", 
@@ -149,32 +150,33 @@ cargo: "Diretor de RH",
 salario: "25.000",
 departamento:ObjectId('6722ea791b0595e440c36a18')}])
 ```
-
+---
 ## 9- Quantos funcionarios a empresa Momento tem agora?
-
+---
 * R: 34 Funcionários.
 ```js
 db["funcionario"].countDocuments()
 ```
-
+---
 ## 10- Quantos funcionários da empresa Momento possuem conjuges?
-
+---
 * R: 7 Funcionários.
 ```js
 db["funcionario"].countDocuments({"dependentes.conjuge":{$exists:true}})
 
 ```
+---
 
 ## 11- Qual a média salarial dos funcionários da empresa Momento, excluindo-se o CEO?
-
+---
 * R: R$ 10.103
 ```js
 db["funcionario"].aggregate([{$match:{cargo:{$ne:"CEO"}}},{$group:{_id:null,mediaSalarios:{$avg:"$salario"}}},{$replaceRoot:{newRoot:{mediaSalarios:"$mediaSalarios"}}}])
 
 ```
-
+---
 ## 12- Qual a média salarial do departamento de Tecnologia??
-
+---
 * R: R$:5.800
 ```js
 db["funcionario"].aggregate([
@@ -191,10 +193,10 @@ db["funcionario"].aggregate([
   }
 ])
 ```
-
+---
 
 ## 13- Qual o departamento com a maior média salarial?
-
+---
 * R: Execultivo.
 ```js
 db["funcionario"].aggregate([
@@ -232,17 +234,17 @@ db["funcionario"].aggregate([
   }
 ])
 ```
-
+---
 ## 15- Pensando na relação quantidade e valor unitario, qual o produto mais valioso da empresa?
-
+---
 * R: Sabre de Luz.
 ```js
  db["vendas"].aggregate([{ $sort:{ quantidade:-1}},
  {$sort:{ precoUnitario:-1}}, { $limit: 1 }])
  ```
-
+---
 ## 16- Qual o produto mais vendido da empresa?
-
+---
 *R: Laço da verdade.
 ```js
 db["vendas"].aggregate([
@@ -261,8 +263,9 @@ db["vendas"].aggregate([
 ])
 
 ```
+---
 ## 17-Qual o produto menos vendido da empresa?
-
+---
 * R: Uniforme do Superman
 ```js
 db["vendas"].aggregate([{ $sort: { quantidade: -1 } }, { $limit: 1 }]);
