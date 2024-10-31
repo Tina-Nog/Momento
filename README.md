@@ -26,11 +26,11 @@ db["funcionario"].insertOne({
 
 ## 3- Agora diga, quantos funcionários temos ao total na empresa?
 
-*R: 24 funcionários.
+R: 24 funcionários.
 ```js
 db["funcionario"].countDocuments()
 ```
-
+---
 ## 4- E quanto ao Departamento de Tecnologia?
 
 * R: 6 funcionários. 
